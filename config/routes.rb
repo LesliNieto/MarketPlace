@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  resources :users, only: [:index]
+
   root 'products#index'
-  resources :products, only: [:index]
+
+  resources :users, only: [:index]
+  resources :products, only: [:index, :new, :create]
+
 end

@@ -1,0 +1,23 @@
+<%= form_for(@product) do |f| %>
+  <% @product.errors.full_messages.each do |message| %>
+    <div >
+      * <%= message %>
+    </div>
+  <% end %>
+  <h1><%= name %> User</h1>
+  <div class="field">
+    <%= f.text_field :name, placeholder: "Name", autocomplete:"off", class:"form"%>
+  </div>
+  <div class="field">
+    <%= f.text_area :description, placeholder: "Type the product's description", style: "height: 200px",class:"form" %>
+  </div>
+  <div class="field">
+    <%= f.text_field :quantity, placeholder: "Quantity", autocomplete:"off", class:"form" %>
+  </div>
+  <div class="field">
+    <%= f.text_field :price, placeholder: "Price", autocomplete:"off",class:"form" %>
+  </div>
+  <div class="field">
+    <%= f.submit "Submit", class:"form"%>
+  </div>
+<% end %>
