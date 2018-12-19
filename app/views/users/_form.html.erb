@@ -1,0 +1,26 @@
+<%= form_for @user do |f| %>
+  <% @user.errors.full_messages.each do |message| %>
+    <div class="field" >
+      * <%= message %>
+    </div>
+  <% end %>
+  <h1><%= name %> User</h1>
+  <div class="field" >
+    <%= f.text_field :first_name, autocomplete: "off", placeholder: "First Name", class: "form" %>
+  </div>
+  <div class="field" >
+    <%= f.text_field :last_name, autocomplete: "off", placeholder: "Last Name", class: "form" %>
+  </div>
+  <div class="field" >
+    <%= f.email_field :email, autocomplete: "off", placeholder: "Email", class: "form" %>
+  </div>
+  <div class="field" >
+    <%= f.text_field :cellphone, autocomplete: "off", placeholder: "Cellphone", class: "form" %>
+  </div>
+  <div class="field" >
+    <%= f.text_field :address, autocomplete: "off", placeholder: "Adress", class: "form" %>
+  </div>
+  <div class="field" >
+    <%= f.submit "Submit", class: "form" %>
+  </div>
+<% end %>
