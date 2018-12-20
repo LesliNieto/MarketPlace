@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+  before_action :set_product, except: [:index, :new, :create]
 
   def index
     @products = Product.all
@@ -10,7 +11,6 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
-
     if @product.save
       redirect_to products_path
     else
@@ -18,17 +18,24 @@ class ProductsController < ApplicationController
     end
   end
 
-  def show
-    @product = Product.find(params[:id])
-  end
-
   def destroy
-    @product = Product.find(params[:id])
     @product.destroy
     redirect_to products_path
   end
 
+  def update
+    if @product.update(product_params)
+      redirect_to @product
+    else
+      render :edit
+    end
+  end
+
   private
+
+  def set_product
+    @product = Product.find(params[:id])
+  end
 
   def product_params
     params.require(:product).permit(:name, :description, :quantity, :price)
