@@ -7,7 +7,7 @@
   </tr>
   <% @users.each do | user | %>
    <tr>
-     <td><%= user.first_name %> <%= user.last_name %></td>
+     <td> <%= link_to "#{user.first_name} #{user.last_name}", user %> </td>
      <td><%= user.cellphone %></td>
      <td><%= user.email %></td>
    </tr>
