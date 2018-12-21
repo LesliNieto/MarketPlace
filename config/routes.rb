@@ -4,6 +4,6 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :users, only: [:index, :show]
-  resources :products, except: [:edit, :update]
+  resources :products
 
 end
