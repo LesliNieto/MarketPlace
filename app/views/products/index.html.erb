@@ -2,10 +2,14 @@
 <table border="2">
   <th> Name </th>
   <th> Description </th>
+  <th> </th>
   <% @products.each do |product|  %>
     <tr>
       <td><%= link_to product.name, product %></td>
       <td><%= product.description %></td>
+      <td><%= link_to "Delete", product, data: {confirm: "Are you sure?"}, method: :delete %></td>
     </tr>
   <% end %>
 </table>
+
+<button class="field form"><%= link_to "New", new_product_path %></button>
