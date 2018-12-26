@@ -1,15 +1,22 @@
-<h1>Products</h1>
-<table border="2">
-  <th> Name </th>
-  <th> Description </th>
-  <th> </th>
-  <% @products.each do |product|  %>
-    <tr>
-      <td><%= link_to product.name, product %></td>
-      <td><%= product.description %></td>
-      <td><%= link_to "Delete", product, data: {confirm: "Are you sure?"}, method: :delete %></td>
-    </tr>
-  <% end %>
-</table>
-
-<button class="field form"><%= link_to "New", new_product_path %></button>
+<div class="container-fluid">
+  <h1 class="text-center mx-auto " >Products</h1>
+  <table class="table table-hover">
+    <thead>
+      <tr class="p-3 mb-2 bg-info text-white">
+        <th scope="col">Name</th>
+        <th scope="col">Description</th>
+        <th scope="col"> Delete </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @products.each do |product|  %>
+        <tr >
+          <td><%= link_to product.name, product %></td>
+          <td><%= product.description %></td>
+          <td ><%= link_to "Delete", product, data: {confirm: "Are you sure?"}, method: :delete, class:"btn btn-outline-secondary" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= link_to "New", new_product_path, class:"btn btn-outline-dark btn-lg " %>
+</div>
