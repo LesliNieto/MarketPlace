@@ -1,9 +1,19 @@
-<h1>User</h1>
-<h3> Name: <%= @user.first_name %> <%= @user.last_name %> </h3>
-<p> Cellphone: <%= @user.cellphone %> </p>
-<p> Email: <%= @user.email %> </p>
-<p> Address: <%= @user.address %> </p>
-
-<h3>Cancel my account</h3>
-<p>¿UnHappy? <%= button_to "Cancel my account", @user, data: { confirm: "Are you sure?" }, method: :delete, class: "form" %></p>
-<%= link_to "Back", users_path %>
+<div class="container">
+  <h2><%= @user.first_name %> <%= @user.last_name %></h2>
+  <table class="table">
+    <tr>
+      <th class="bg-info"> Cellphone </th>
+      <td><%= @user.cellphone %></td>
+    </tr>
+    <tr>
+      <th class="bg-info"> Email </th>
+      <td><%= @user.email %></td>
+    </tr>
+    <tr>
+      <th class="bg-info"> Address </th>
+      <td><%= @user.address %></td>
+    </tr>
+  </table>
+  <p>¿UnHappy? <%= button_to "Cancel my account", @user, data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-outline-danger" %></p>
+  <%= link_to "Back", users_path, class: "btn btn-outline-info" %>
+</div>
