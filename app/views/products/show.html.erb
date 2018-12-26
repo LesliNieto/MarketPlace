@@ -1,10 +1,19 @@
-<h1 class="title"><%= @product.name %></h1>
-<div class="body ">
-  <p> <%= @product.description %> </p>
-  <p> Precio: <%= @product.price %> </p>
-  <p> Cantidad: <%= @product.quantity %> </p>
-</div>
-<div class="field">
-  <button class="form"><%= link_to "Edit", edit_product_path %> </button>
-   <button class="form"><%= link_to "Back", products_path %> </button>
+<div class="container ">
+  <h1 class="text-center" ><%= @product.name %></h1>
+  <table class="table">
+    <tr>
+      <th class="bg-info">Description</th>
+      <td><%= @product.description %></td>
+    </tr>
+    <tr>
+      <th class="bg-info">Price</th>
+      <td><%= @product.price %></td>
+    </tr>
+    <tr>
+      <th class="bg-info">Quantity</th>
+      <td><%= @product.quantity %></td>
+    </tr>
+  </table>
+  <%= link_to "Edit", edit_product_path, class: "btn btn-outline-info btn-lg" %>
+  <%= link_to "Back", products_path, class: "btn btn-outline-info btn-lg" %>
 </div>

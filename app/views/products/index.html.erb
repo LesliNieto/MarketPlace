@@ -13,10 +13,10 @@
         <tr >
           <td><%= link_to product.name, product %></td>
           <td><%= product.description %></td>
-          <td ><%= link_to "Delete", product, data: {confirm: "Are you sure?"}, method: :delete, class:"btn btn-outline-secondary" %></td>
+          <td ><%= link_to "Delete", product, data: {confirm: "Are you sure?"}, method: :delete, class:"btn btn-outline-danger" %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
-  <%= link_to "New", new_product_path, class:"btn btn-outline-dark btn-lg " %>
+  <%= link_to "New", new_product_path, class:"btn btn-outline-info btn-lg " %>
 </div>
