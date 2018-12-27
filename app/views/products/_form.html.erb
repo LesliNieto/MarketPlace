@@ -1,23 +1,34 @@
 <%= form_for(@product) do |f| %>
   <% @product.errors.full_messages.each do |message| %>
-    <div >
-      * <%= message %>
+    <div class="alert alert-danger" role="alert">
+      <li><%= message %></li>
     </div>
   <% end %>
-  <h1><%= name %> Product</h1>
-  <div class="field">
-    <%= f.text_field :name, placeholder: "Name", autocomplete:"off", class:"form"%>
-  </div>
-  <div class="field">
-    <%= f.text_area :description, placeholder: "Type the product's description", style: "height: 200px",class:"form" %>
-  </div>
-  <div class="field">
-    <%= f.text_field :quantity, placeholder: "Quantity", autocomplete:"off", class:"form" %>
-  </div>
-  <div class="field">
-    <%= f.text_field :price, placeholder: "Price", autocomplete:"off",class:"form" %>
-  </div>
-  <div class="field">
-    <%= f.submit "Submit", class:"form"%>
-  </div>
+    <div class="container" >
+      <h1><%= name %> Product</h1>
+      <div class="form-group ">
+        <%= f.label :name %>
+        <%= f.text_field :name, placeholder: "Name", autocomplete:"off", class: "form-control" %>
+      </div>
+      <div class="form-group" >
+        <%= f.label :description %>
+        <%= f.text_area :description, placeholder: "Type the product's description", style: "height: 200px",class:"form-control" %>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6" >
+          <%=f.label :quantity%>
+          <%= f.text_field :quantity, placeholder: "Quantity", autocomplete:"off", class:"form-control" %>
+        </div>
+        <div class="form-group col-md-6" >
+          <%= f.label :price %>
+          <%= f.text_field :price, placeholder: "Price", autocomplete:"off",class:"form-control" %>
+        </div>
+      </div>
+      <%= f.submit "Submit", class:"btn btn-outline-success btn-lg" %>
+      <% if name.eql?("Edit") %>
+        <%= link_to "Back", product_path, class:"btn btn-outline-info btn-lg" %>
+      <% else %>
+        <%= link_to "Back", products_path, class:"btn btn-outline-info btn-lg" %>
+      <% end %>
+    </div>
 <% end %>
