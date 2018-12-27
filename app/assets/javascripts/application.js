@@ -17,4 +17,3 @@
 // = requiere popper
 // = requiere bootstrap-sprockets
 //= require_tree .
-
