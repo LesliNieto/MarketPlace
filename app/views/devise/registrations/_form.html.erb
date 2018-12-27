@@ -1,59 +1,76 @@
-<h2> <%= name %> </h2>
+<div class="container">
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
+  <h2> <%= name %> </h2>
 
-  <div class="field" >
-    <%= f.label :first_name %><br>
-    <%= f.text_field :first_name, autocomplete: "off", placeholder: "First Name", class: "form" %>
-  </div>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
 
-  <div class="field" >
-    <%= f.label :last_name %><br>
-    <%= f.text_field :last_name, autocomplete: "off", placeholder: "Last Name", class: "form" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email,autocomplete: "email", placeholder: "Email", class: "form" %>
-  </div>
-  <div class="field" >
-    <%= f.label :cellphone %><br>
-    <%= f.text_field :cellphone, autocomplete: "off", placeholder: "Cellphone", class: "form" %>
-  </div>
-
-  <div class="field" >
-    <%= f.label :address %><br>
-    <%= f.text_field :address, autocomplete: "off", placeholder: "Adress", class: "form" %>
-  </div>
-
-  <div class="field">
-    <% if name.eql?("Edit") %>
-      <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br>
-    <% else %>
-      <%= f.label :password %><br>
+    <% unless devise_error_messages!.empty? %>
+      <div class="alert alert-danger" role="alert">
+        <%= devise_error_messages! %>
+      </div>
     <% end %>
-    <%= f.password_field :password, autocomplete: "new-password", placeholder: "Password", class: "form" %>
-    <br><em>(<%= @minimum_password_length %> characters minimum)</em>
-  </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Password Confirmation", class: "form" %>
-  </div>
-  <% if name.eql?("Edit") %>
-    <div class="field">
-      <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-      <%= f.password_field :current_password, autocomplete: "current-password", class: "form" %>
+    <div class="form-row">
+      <div class="form-group col-md-6" >
+        <%= f.label :first_name %><br>
+        <%= f.text_field :first_name, autocomplete: "off", placeholder: "First Name", class: "form-control" %>
+      </div>
+
+      <div class="form-group col-md-6" >
+        <%= f.label :last_name %><br>
+        <%= f.text_field :last_name, autocomplete: "off", placeholder: "Last Name", class: "form-control" %>
+      </div>
     </div>
-    <div class="actions">
-      <%= f.submit "Update", class: "form" %>
+
+    <div class="form-group">
+      <%= f.label :email %><br>
+      <%= f.email_field :email,autocomplete: "off", placeholder: "Email", class: "form-control" %>
     </div>
-    <%= link_to "Back", :back %>
-  <% else %>
-    <div class="actions">
-      <%= f.submit "Sign up", class: "form" %>
+
+    <div class="form-group" >
+      <%= f.label :cellphone %><br>
+      <%= f.text_field :cellphone, autocomplete: "off", placeholder: "Cellphone", class: "form-control" %>
     </div>
+
+    <div class="form-group" >
+      <%= f.label :address %><br>
+      <%= f.text_field :address, autocomplete: "off", placeholder: "Adress", class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :password %>
+
+      <% if name.eql?("Edit") %>
+        <i>(leave blank if you don't want to change it)</i><br>
+      <% end %>
+
+      <em>(<%= @minimum_password_length %> characters minimum)</em>
+      <%= f.password_field :password, autocomplete: "new-password", placeholder: "Password", class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :password_confirmation %><br>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Password Confirmation", class: "form-control" %>
+    </div>
+
+    <% if name.eql?("Edit") %>
+      <div class="form-group">
+        <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br>
+        <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control" %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "Update", class: "btn btn-outline-success btn-block" %>
+      </div>
+
+      <%= link_to "Back", :back, class: "btn btn-outline-info btn-block" %>
+    <% else %>
+
+      <div class="actions">
+        <%= f.submit "Sign up", class: "btn btn-outline-success btn-block" %>
+      </div>
+    <% end %><br>
+
   <% end %>
-  
-<% end %>
+
+</div>
