@@ -6,41 +6,40 @@
   <% end %>
   <div class="container mx-auto col-md-9" >
     <h1><%= name %> Product</h1>
-    <div class="form-group ">
+    <div class="form-group">
       <%= f.label :name %>
       <%= f.text_field :name, placeholder: "Name", autocomplete:"off", class: "form-control" %>
     </div>
-
-    <div class="form-group ">
+    <div class="form-group">
       <%= f.fields_for :images do |img_f| %>
-      <%= render partial: "image_fields", locals: {f: img_f} %>
+        <%= render partial: "image_fields", locals: {f: img_f} %>
       <% end %>
       <%=  link_to_add_association '+', f, :images, class:"btn btn-outline-success"%>
     </div>
-
-    <div class="form-group" >
+    <div class="form-group">
       <%= f.label :description %>
       <%= f.text_area :description, placeholder: "Type the product's description", style: "height: 200px",class:"form-control" %>
     </div>
+
     <div class="form-row">
-      <div class="form-group col-md-6" >
+      <div class="form-group col-md-6">
         <%=f.label :quantity%>
-        <%= f.text_field :quantity, placeholder: "Quantity", autocomplete:"off", class:"form-control" %>
-        <div class="form-group col-md-6" >
-          <%= f.label :price %>
-          <%= f.text_field :price, placeholder: "Price", autocomplete:"off",class:"form-control" %>
-        </div>
+        <%= f.text_field :quantity, placeholder: "Quantity", autocomplete: "off", class: "form-control" %>
       </div>
-      <div>
-        <% if user_signed_in? %>
-          <%= f.submit "Submit", class:"btn btn-outline-success btn-lg" %>
-        <% end %>
-        <% if name.eql?("Edit") %>
-          <%= link_to "Back", product_path, class:"btn btn-outline-info btn-lg" %>
-        <% else %>
-          <%= link_to "Back", products_path, class:"btn btn-outline-info btn-lg" %>
-        <% end %>
+      <div class="form-group col-md-6">
+        <%= f.label :price %>
+        <%= f.text_field :price, placeholder: "Price", autocomplete: "off", class: "form-control" %>
       </div>
+    </div>
+    <div>
+      <% if user_signed_in? %>
+        <%= f.submit "Submit", class:"btn btn-outline-success btn-lg" %>
+      <% end %>
+      <% if name.eql?("Edit") %>
+        <%= link_to "Back", product_path, class:"btn btn-outline-info btn-lg" %>
+      <% else %>
+        <%= link_to "Back", products_path, class:"btn btn-outline-info btn-lg" %>
+      <% end %>
     </div>
   </div>
 <% end %>
