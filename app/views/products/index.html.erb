@@ -5,7 +5,10 @@
       <tr class="p-3 mb-2 bg-info text-white">
         <th scope="col">Name</th>
         <th scope="col">Description</th>
-        <th scope="col"> Delete </th>
+        <th scope="col" >Price</th>
+        <% if user_signed_in? %>
+          <th scope="col"> Delete </th>
+        <% end %>
       </tr>
     </thead>
     <tbody>
@@ -13,9 +16,15 @@
         <tr >
           <td><%= link_to product.name, product %></td>
           <td><%= product.description %></td>
-          <td ><%= link_to "Delete", product, data: {confirm: "Are you sure?"}, method: :delete, class:"btn btn-outline-danger" %></td>
+          <td><%= product.price%></td>
+          <% if user_signed_in? %>
+            <td ><%= link_to "Delete", product, data: {confirm: "Are you sure?"}, method: :delete, class:"btn btn-outline-danger" %></td>
+          <% end %>
         </tr>
       <% end %>
     </tbody>
   </table>
-  <%= link_to "New", new_product_path, class:"btn btn-outline-success btn-lg" %>
+  <% if user_signed_in? %>
+    <%= link_to "New", new_product_path, class:"btn btn-outline-success btn-lg" %>
+  <% end %>
+</div>
