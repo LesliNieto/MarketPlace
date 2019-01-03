@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
   before_action :set_product, except: [:index, :new, :create]
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_categories, only: [:new, :edit]
+  before_action :set_categories, only: [:new, :edit, :create, :update]
   def index
     @products = products_scope
   end
