@@ -1,5 +1,11 @@
 <div class="container ">
   <h1 class="text-center" ><%= @product.name %></h1>
+  <div class="text-center">
+      <% @product.images.each do |image| %>
+         <%= image_tag image.image.url(:thumb)%>
+      <% end %>
+  </div>
+  <br>
   <table class="table">
     <tr>
       <th class="bg-info">Description</th>
@@ -19,3 +25,5 @@
   <% end %>
   <%= link_to "Back", products_path, class: "btn btn-outline-info btn-lg" %>
 </div>
+<br>
+<br>
