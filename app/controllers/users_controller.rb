@@ -11,8 +11,12 @@ class UsersController < ApplicationController
 
   def destroy
     @user = User.find(params[:id])
-    @user.destroy
-    redirect_to users_path
+    if @user.eql?(current_user)
+      @user.destroy
+      redirect_to users_path
+    else
+      redirect_to user_path, :alert => "Action not allowed"
+    end
   end
 
 end
