@@ -1,8 +1,8 @@
 <div class="container ">
   <h1 class="text-center" ><%= @product.name %></h1>
   <div class="text-center">
-      <% @product.images.each do |image| %>
-         <%= image_tag image.image.url(:thumb)%>
+      <% @product.product_images.each do |product_image| %>
+         <%= image_tag product_image.image.url(:thumb)%>
       <% end %>
   </div>
   <br>

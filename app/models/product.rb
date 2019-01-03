@@ -8,9 +8,9 @@ class Product < ApplicationRecord
 
   scope :published, ->{ where(status: "published") }
   scope :unpublished, ->{ where(status: "unpublished") }
-  scope :archived, ->{ where(status: "file") }
+  scope :archived, ->{ where(status: "archived") }
 
-  enum status: {unpublished: 0, published: 1, file: 2} do
+  enum status: {unpublished: 0, published: 1, archived: 2} do
     event :publish do
       transition :unpublished => :published
     end
@@ -20,6 +20,6 @@ class Product < ApplicationRecord
     end
   end
 
-  has_many :images, dependent: :destroy
-  accepts_nested_attributes_for :images, allow_destroy: true
+  has_many :product_images, dependent: :destroy
+  accepts_nested_attributes_for :product_images, allow_destroy: true
 end
