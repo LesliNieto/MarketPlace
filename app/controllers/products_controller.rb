@@ -1,6 +1,7 @@
 class ProductsController < ApplicationController
   before_action :set_product, except: [:index, :new, :create]
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :set_categories, only: [:new, :edit]
   def index
     @products = products_scope
   end
@@ -42,8 +43,12 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
   end
 
+  def set_categories
+    @categories = Category.all
+  end
+
   def product_params
-    params.require(:product).permit(:name, :description, :quantity, :price, product_images_attributes:[:id, :image, :_destroy])
+    params.require(:product).permit(:name, :description, :quantity, :price, :category_id, product_images_attributes:[:id, :image, :_destroy])
   end
 
 end
