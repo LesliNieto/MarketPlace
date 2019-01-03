@@ -2,15 +2,16 @@ class ProductsController < ApplicationController
   before_action :set_product, except: [:index, :new, :create]
   before_action :authenticate_user!, except: [:index, :show]
   def index
-    @products = Product.all
+    @products = products_scope
   end
 
   def new
-    @product = Product.new
+    @product = products_scope.new
+    @product.images.build
   end
 
   def create
-    @product = current_user.products.new(product_params)
+    @product = products_scope.new(product_params)
     if @product.save
       redirect_to products_path, :notice => "Saved"
     else
@@ -33,12 +34,16 @@ class ProductsController < ApplicationController
 
   private
 
+  def products_scope
+    current_user.products
+  end
+
   def set_product
     @product = Product.find(params[:id])
   end
 
   def product_params
-    params.require(:product).permit(:name, :description, :quantity, :price)
+    params.require(:product).permit(:name, :description, :quantity, :price, images_attributes:[:id, :image, :_destroy])
   end
 
 end
