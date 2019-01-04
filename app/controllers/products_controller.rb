@@ -3,7 +3,7 @@ class ProductsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_categories, only: [:new, :edit, :create, :update]
   def index
-    @products = products_scope
+    @products = Product.published
   end
 
   def new
