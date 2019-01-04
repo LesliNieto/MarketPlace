@@ -35,6 +35,9 @@ class ProductsController < ApplicationController
 
   def publish
     @product.publish!
+    User.find_each do |user|
+      ProductNotifierMailer.new_product_available(@product, user).deliver
+    end
     redirect_to products_path, :notice => "Published"
   end
 
