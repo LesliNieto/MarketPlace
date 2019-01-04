@@ -21,8 +21,8 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    @product.destroy
-    redirect_to products_path, :notice => "Deleted"
+    @product.archive!
+    redirect_to products_path, :notice => "Archived"
   end
 
   def update
@@ -31,6 +31,11 @@ class ProductsController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def publish
+    @product.publish!
+    redirect_to products_path, :notice => "Published"
   end
 
   private

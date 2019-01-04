@@ -1,0 +1,31 @@
+<div class="container-fluid">
+  <h1 class="text-center mx-auto">My Products</h1>
+  <table class="table table-hover">
+    <thead class="thead-light">
+      <tr>
+        <th>Unpublished</th>
+        <th>Published</th>
+        <th>Archived</th>
+      </tr>
+    </thead>
+    <tr>
+      <td>
+        <% @products_unpublished.each do |product| %>
+          <%= link_to "Publish", "/products/#{product.id}/publish", method: :put, class: "btn btn-outline-success" %>
+          <%= link_to product.name, product%><br>
+        <% end %>
+      </td>
+      <td>
+        <% @products_published.each do |product| %>
+          <%= link_to "Archive", product, data: {confirm: "Are you sure?"}, method: :delete, class: "btn btn-outline-danger" %>
+          <%= link_to product.name, product%><br>
+        <% end %>
+      </td>
+      <td>
+        <% @products_archived.each do |product| %>
+         <%= link_to product.name, product%><br>
+        <% end %>
+      </td>
+    </tr>
+  </table>
+</div>
