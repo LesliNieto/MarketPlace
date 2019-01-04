@@ -2,7 +2,7 @@ class ProductsController < ApplicationController
   before_action :set_product, except: [:index, :new, :create]
   before_action :authenticate_user!, except: [:index, :show]
   def index
-    @products = products_scope
+    @products = Product.published
   end
 
   def new
@@ -20,8 +20,8 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    @product.destroy
-    redirect_to products_path, :notice => "Deleted"
+    @product.archive!
+    redirect_to products_path, :notice => "Archived"
   end
 
   def update
@@ -30,6 +30,11 @@ class ProductsController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def publish
+    @product.publish!
+    redirect_to products_path, :notice => "Published"
   end
 
   private
