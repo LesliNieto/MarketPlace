@@ -30,6 +30,8 @@ gem 'paperclip', '~> 6.1'
 gem 'cocoon'
 gem 'stateful_enum'
 gem 'sendgrid-ruby'
+gem 'activeadmin'
+gem 'activeadmin_addons'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
