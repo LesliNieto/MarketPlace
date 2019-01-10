@@ -20,7 +20,7 @@ ActiveAdmin.register Product do
   filter :price
   filter :category
   filter :user, collection: -> {
-    User.all.map{ |user| [user.first_name, user.id] }
+    User.pluck(:first_name, :id)
   }
 
 end
