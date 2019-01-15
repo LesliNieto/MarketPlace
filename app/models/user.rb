@@ -16,8 +16,6 @@ class User < ApplicationRecord
       user.first_name = auth_data.info.first_name.presence || auth_data.info.name.split(" ")[0]
       user.last_name = auth_data.info.last_name.presence  || auth_data.info.name.split(" ")[1]
       user.email = auth_data.info.email
-      user.cellphone = auth_data.info.cellphone.presence || "1234567890"
-      user.address = auth_data.info.address.presence || "Barranquilla"
       user.password = Devise.friendly_token[0,20]
     end
   end
