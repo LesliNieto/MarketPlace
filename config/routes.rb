@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   root 'products#index'
 
-  devise_for :users
+  devise_for :users, controllers: {omniauth_callbacks: 'users/omniauth_callbacks'}
   resources :products do
     put "publish", on: :member
   end
