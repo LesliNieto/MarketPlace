@@ -1,9 +1,9 @@
 ActiveAdmin.register Product do
 
   belongs_to :user, optional: true
-  actions :all, except: [:new, :edit]
   permit_params :name, :description, :quantity, :price, :category_id, :user_id
 
+  includes :category, :user
   index do
     selectable_column
     id_column
@@ -19,8 +19,6 @@ ActiveAdmin.register Product do
   filter :name
   filter :price
   filter :category
-  filter :user, collection: -> {
-    User.pluck(:first_name, :id)
-  }
+  filter :user
 
 end

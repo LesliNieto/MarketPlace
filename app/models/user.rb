@@ -9,5 +9,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :products, dependent: :destroy
+  accepts_nested_attributes_for :products, allow_destroy: true
 
 end

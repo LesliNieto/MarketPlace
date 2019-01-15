@@ -1,19 +1,8 @@
 ActiveAdmin.register User do
-# See permitted parameters documentation:
-# https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-#
-# permit_params :list, :of, :attributes, :on, :model
-#
-# or
-#
-# permit_params do
-#   permitted = [:permitted, :attributes]
-#   permitted << :other if params[:action] == 'create' && current_user.admin?
-#   permitted
-# end
   menu priority: 3
 
-  actions :all, except: [:new, :edit]
+  permit_params :first_name, :last_name, :email, :cellphone, :address, :password, :password_confirmation,
+  products_attributes: [:id, :name, :description, :quantity, :price, :category_id, :_destroy]
 
   index do
     selectable_column
@@ -21,11 +10,58 @@ ActiveAdmin.register User do
     column :first_name
     column :last_name
     column :email
-    column :address   
+    column :address
   end
 
   filter :first_name
   filter :last_name
   filter :address
 
+  show do
+    attributes_table do
+      row :first_name
+      row :last_name
+      row :email
+      row :cellphone
+      row :address
+      row :created_at
+      row :updated_at
+    end
+    panel "Products" do
+      table_for user.products do
+        column "name", :name do |product|
+          link_to product.name, admin_product_path(product)
+        end
+        column :description
+        column :price
+        column :quantity
+        column :category
+        column :status
+      end
+    end
+  end
+
+  form do |f|
+    f.inputs do
+      f.input :first_name
+      f.input :last_name
+      f.input :cellphone
+      f.input :address
+      f.input :email
+      f.input :password
+      f.input :password_confirmation
+      f.inputs do
+        f.has_many :products, heading: "Products",
+        allow_destroy: true,
+        new_record: true do |product|
+          product.input :name
+          product.input :description
+          product.input :quantity
+          product.input :price
+          product.input :category
+        end
+      end
+    end
+    f.actions
+  end
 end
