@@ -79,6 +79,7 @@ group :test do
   gem 'recursive-open-struct'
   gem 'simplecov', require: false
   gem 'rails-controller-testing', '>= 1.0.4'
+
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
