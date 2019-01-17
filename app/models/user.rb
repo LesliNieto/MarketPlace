@@ -13,7 +13,7 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :products, allow_destroy: true
 
   def self.create_form_provider_data(auth_data)
-    where(provider: auth_data.provider, uid: auth_data.uid,email: auth_data.info.email).first_or_create do |user|
+    where(provider: auth_data.provider, uid: auth_data.uid, email: auth_data.info.email).first_or_create do |user|
       user.first_name = auth_data.info.first_name.presence || auth_data.info.name.split(" ")[0]
       user.last_name = auth_data.info.last_name.presence  || auth_data.info.name.split(" ")[1]
       user.email = auth_data.info.email
