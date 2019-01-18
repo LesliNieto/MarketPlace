@@ -18,7 +18,7 @@ RSpec.describe User, type: :model do
     
     context 'duplicated emails' do
       let!(:user) { create(:user, email: "test@gmail.com") }
-      
+
       it "is invalid when enter an email that is already in use" do
         user = build(:user, email: "test@gmail.com")
         user.valid?
