@@ -1,16 +1,11 @@
 require 'rails_helper'
 RSpec.describe Product, :type => :model do
-  before(:each) do
-    @product1 = create(:product)
-    @product2 = create(:product, status: "published")
-    @product3 = create(:product, status: "archived")
-  end
-
   describe "#Create" do
 
-    context "When a product has been created " do
+    context "When a product has been created via a factory" do
+      let(:product) { create(:product) }
       it "is valid with name, description, quantity, price, cateogry_id, user_id" do
-        expect(@product1).to be_persisted
+        expect(product).to be_persisted
       end
     end
 
@@ -30,16 +25,20 @@ RSpec.describe Product, :type => :model do
     end
 
     context "Scopes" do
+      let!(:unpublished_product) { create(:product) }
+      let!(:published_product) { create(:product, status: "published") }
+      let!(:archived_product) { create(:product, status: "archived") }
+
       it "should get the unpublished products" do
-        expect(@product1.status).to eql("unpublished")
+        expect(Product.unpublished).to contain_exactly(unpublished_product)
       end
 
       it "should get the published products" do
-        expect(@product2.status).to eql("published")
+        expect(Product.published).to contain_exactly(published_product)
       end
 
       it "should get the archived products" do
-        expect(@product3.status).to eql("archived")
+        expect(Product.archived).to contain_exactly(archived_product)
       end
     end
 
