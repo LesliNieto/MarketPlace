@@ -4,46 +4,33 @@ RSpec.describe UsersController, type: :controller do
 
   login_user
 
-  it { expect(users_path).to eq "/users" }
-  it { expect(get: users_url).to route_to(
-    controller: 'users',
-    action: 'index' )
-  }
-
-  it { expect(user_path(1)).to eq "/users/1" }
-  it { expect(get: user_url(1)).to route_to(
-    controller: 'users',
-    action: 'show',
-    id: '1')
-  }
-
-  it { expect(dashboard_path).to eq "/dashboard" }
-  it { expect(get: dashboard_url).to route_to(
-    controller: 'users',
-    action: 'dashboard')
-  }
-
-  it "current_user" do
+  it "validate user logged" do
     expect(subject.current_user).to_not eq(nil)
   end
 
-  it "GET #index" do
-    get :index
-    expect(response).to have_http_status(:ok)
-    expect(response).to render_template :index
-    expect(assigns(:users)).to eq([subject.current_user])
+  describe "GET #index" do
+    it "returns ok status, renders :index template and assigns the users logged" do
+      get :index
+      expect(response).to have_http_status(:ok)
+      expect(response).to render_template :index
+      expect(assigns(:users)).to eq([subject.current_user])
+    end
   end
 
-  it "GET #show" do
-    get :show, params: { id: subject.current_user.id }
-    expect(response).to have_http_status(:ok)
-    expect(response).to render_template :show
-    expect(assigns(:user)).to eq(subject.current_user)
+  describe "GET #show" do
+    it "returns ok status, renders :show template and correctly assigns user" do
+      get :show, params: { id: subject.current_user.id }
+      expect(response).to have_http_status(:ok)
+      expect(response).to render_template :show
+      expect(assigns(:user)).to eq(subject.current_user)
+    end
   end
 
-  it "DELETE #destroy" do
-    expect{ delete :destroy, params: { id: subject.current_user.id } }.to change(User, :count).from(1).to(0)
-    expect(response).to redirect_to root_path
+  describe "DELETE #destroy" do
+    it "delete the user of the database and redirect to root" do
+      expect{ delete :destroy, params: { id: subject.current_user.id } }.to change(User, :count).from(1).to(0)
+      expect(response).to redirect_to root_path
+    end
   end
 
   describe "GET #dashboard" do
@@ -53,7 +40,7 @@ RSpec.describe UsersController, type: :controller do
     let(:product_published) { create(:product, user_id: subject.current_user.id, category_id: category.id, status: "published") }
     let(:product_archived) { create(:product, user_id: subject.current_user.id, category_id: category.id, status: "archived") }
 
-    it "must get the user's products" do
+    it "must get the products of the user who has logged in" do
       get :dashboard
       expect(response).to have_http_status(:ok)
       expect(response).to render_template :dashboard
