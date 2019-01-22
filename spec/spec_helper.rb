@@ -21,6 +21,12 @@ RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
+  require 'omniauth'
+
+  config.before(:all) do
+    FactoryBot.reload
+  end
+
   config.expect_with :rspec do |expectations|
     # This option will default to `true` in RSpec 4. It makes the `description`
     # and `failure_message` of custom matchers include text for helper methods
@@ -48,6 +54,32 @@ RSpec.configure do |config|
   # triggering implicit auto-inclusion in groups with matching metadata.
   config.shared_context_metadata_behavior = :apply_to_host_groups
 
+  OmniAuth.config.test_mode = true
+
+  omniauth_hash_facebook = ({
+    provider: 'facebook',
+    uid: '1234567',
+    info: {
+    email: 'joe_bloggs@example.com',
+    name: 'Joe Bloggs',
+    first_name: 'Joe',
+    last_name: 'Bloggs'
+    }
+  })
+
+  omniauth_hash_google = ({
+    provider: 'google',
+    uid: '7894561',
+    info: {
+    email: 'lau4@example.com',
+    name: 'Laura Peña',
+    first_name: 'Laura',
+    last_name: 'Peña'
+    }
+  })
+
+  OmniAuth.config.add_mock(:facebook, omniauth_hash_facebook)
+  OmniAuth.config.add_mock(:google, omniauth_hash_google)
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.
 =begin
