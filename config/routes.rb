@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  default_url_options :host => "localhost" if Rails.env.test?
 
   default_url_options :host => "localhost" if Rails.env.test?
 
