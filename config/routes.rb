@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  default_url_options :host => "localhost" if Rails.env.test?
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   root 'products#index'

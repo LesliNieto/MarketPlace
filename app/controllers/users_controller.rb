@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, only: [:destroy, :dashboard]
+  before_action :authenticate_user!, only: [:index, :destroy, :dashboard]
 
   def index
     @users = User.all
@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.eql?(current_user)
       @user.destroy
-      redirect_to users_path
+      redirect_to root_path
     else
       redirect_to user_path, :alert => "Action not allowed"
     end
