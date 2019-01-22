@@ -33,3 +33,5 @@
 # Ignore .env files
 *.env
 coverage
+.DS_Store
+/public/system

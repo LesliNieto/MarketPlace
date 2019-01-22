@@ -4,7 +4,7 @@ FactoryBot.define do
     description { Faker::Commerce.material }
     quantity { 12 }
     price { Faker::Commerce.price }
-    category_id { 1 }
-    user_id { 1 }
+    category
+    user
   end
 end
