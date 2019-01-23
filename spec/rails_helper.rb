@@ -40,10 +40,6 @@ rescue ActiveRecord::PendingMigrationError => e
   exit 1
 end
 
-<<<<<<< HEAD
-=======
-
->>>>>>> Adding unit test to product controller
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"

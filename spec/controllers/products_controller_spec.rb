@@ -31,13 +31,15 @@ RSpec.describe ProductsController, :type => :controller do
     end
   end
 
-  describe "GET #create" do
+  describe "POST #create" do
+    let(:category) { create(:category) }
+
     it "is created with the required fields" do
       product_attributes = {
-        product: FactoryBot.attributes_for(:product)
+        product: FactoryBot.attributes_for(:product, category_id: category.id)
       }
       expect{ post :create, { params: product_attributes } }.to change( Product, :count ).by(1)
-      expect(response).to redirect_to products_path
+      expect(response).to redirect_to dashboard_path
     end
 
     it "renders an error because of missing required fields" do

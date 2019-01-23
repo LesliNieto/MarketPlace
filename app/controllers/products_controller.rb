@@ -6,6 +6,10 @@ class ProductsController < ApplicationController
     @products = Product.published
   end
 
+  def show
+    #set_product
+  end
+
   def new
     @product = products_scope.new
     @product.product_images.build
@@ -14,7 +18,7 @@ class ProductsController < ApplicationController
   def create
     @product = products_scope.new(product_params)
     if @product.save
-      redirect_to products_path, :notice => "Saved"
+      redirect_to dashboard_path, :notice => "Saved"
     else
       render :new
     end
@@ -48,7 +52,8 @@ class ProductsController < ApplicationController
   end
 
   def set_product
-    @product = Product.find(params[:id])
+    @product = Product.find_by(id: params[:id])
+    redirect_to root_path, :alert => "Page not found" unless @product
   end
 
   def set_categories

@@ -6,17 +6,13 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    @user = User.find_by(id: params[:id])
+    redirect_to root_path, :alert => "Page not found" unless @user
   end
 
   def destroy
-    @user = User.find(params[:id])
-    if @user.eql?(current_user)
-      @user.destroy
-      redirect_to root_path
-    else
-      redirect_to user_path, :alert => "Action not allowed"
-    end
+    current_user.destroy
+    redirect_to root_path
   end
 
   def dashboard
