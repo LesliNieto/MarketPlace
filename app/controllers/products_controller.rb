@@ -6,6 +6,10 @@ class ProductsController < ApplicationController
     @products = Product.published
   end
 
+  def show
+    #set_product
+  end
+
   def new
     @product = products_scope.new
     @product.product_images.build
@@ -48,11 +52,8 @@ class ProductsController < ApplicationController
   end
 
   def set_product
-    if Product.find_by(id: params[:id])
-      @product = Product.find(params[:id])
-    else
-      redirect_to root_path, :alert => "Page not found"
-    end
+    @product = Product.find_by(id: params[:id])
+    redirect_to root_path, :alert => "Page not found" unless @product
   end
 
   def set_categories

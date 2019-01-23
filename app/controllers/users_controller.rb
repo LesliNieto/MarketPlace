@@ -6,11 +6,8 @@ class UsersController < ApplicationController
   end
 
   def show
-    if User.find_by(id: params[:id])
-      @user = User.find(params[:id])
-    else
-      redirect_to root_path, :alert => "Page not found"
-    end
+    @user = User.find_by(id: params[:id])
+    redirect_to root_path, :alert => "Page not found" unless @user
   end
 
   def destroy
