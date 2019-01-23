@@ -72,9 +72,7 @@ group :test do
   gem 'capybara', '~> 3.12'
   gem 'database_cleaner', '~> 1.7'
   gem 'launchy', '>= 2.4.3'
-  gem 'selenium-webdriver'
-  # Easy installation and use of chromedriver to run system tests with Chrome
-  gem 'chromedriver-helper'
+  gem 'poltergeist'
   gem 'shoulda-matchers', '>= 3.1.2'
   gem 'recursive-open-struct'
   gem 'simplecov', require: false
