@@ -6,3 +6,5 @@ module SessionHelpers
     click_button 'Log in'
   end
 end
+
+
